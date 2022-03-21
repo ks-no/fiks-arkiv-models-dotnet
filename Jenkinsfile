@@ -1,6 +1,6 @@
 pipeline {
     agent any
-        parameters {
+    parameters {
         booleanParam(defaultValue: false, description: 'Skal branch deployes til dev?', name: 'deployBranchToDev')
         booleanParam(defaultValue: false, description: 'Skal prosjektet releases?', name: 'isRelease')
         string(name: "specifiedVersion", defaultValue: "", description: "Hva er det nye versjonsnummeret (X.X.X)? Som default releases snapshot-versjonen")
@@ -36,27 +36,49 @@ pipeline {
             }
         }
         stage('Fetch specification') {
-          steps{
-          dir('KS.Fiks.Arkiv.Models') {
-            git branch: 'main',
-            url: 'https://github.com/ks-no/fiks-arkiv-specification.git'
-            
+          steps{ 
+            dir('temp') {
+              git branch: 'main',
+              url: 'https://github.com/ks-no/fiks-arkiv-specification.git'
+              stash(name: 'xsd', includes: 'Schema/V1/*')
+            }
           }
         }
-      }
-        stage('List'){
+        stage('Generate models'){
+          agent {
+            docker {
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
+              args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet'
+            }
+          }
         steps {
-            sh 'ls -l'
-          
-          dir("${MODELS_FOLDER}") {
-            sh 'ls -l'
-          }
           dir("${GENERATOR_FOLDER}"){
+            unstash 'xsd'
+            sh 'dotnet run Schema/V1'
+            stash(name: 'generated', includes: 'output/**')
+          }
+        }
+      }
+      stage('Pack nuget'){
+        steps{
+          dir("${MODELS_FOLDER}"){
+            unstash 'generated'
+            sh 'ls -l'
+            unstash 'xsd'
+            sh 'ls -l'
+            sh 'mv output/* .'
+            sh 'ls -l'
+            sh 'rm -r output'
             sh 'ls -l'
           }
         }
       }
-    }
+    // post {
+    //   always {
+    //     deleteDir()
+    //   }
+    // }
+  }
 }
 
 def findVersionSuffix() {

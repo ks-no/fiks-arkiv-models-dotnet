@@ -1,32 +1,10 @@
 ﻿using XmlSchemaClassGenerator;
 
-var fileList = new List<string>
-{
-    "metadatakatalog.xsd",
-    "arkivmelding.xsd",
-    "arkivmeldingKvittering.xsd",
-    "sok.xsd",
-    "sokeresultatUtvidet.xsd",
-    "sokeresultatMinimum.xsd",
-    "sokeresultatNoekler.xsd",
-    "arkivstrukturMinimum.xsd",
-    "arkivstrukturNoekler.xsd",
-    "arkivstruktur.xsd",
-    "dokumentfilHent.xsd",
-    "journalpostHent.xsd",
-    "journalpostHentResultat.xsd",
-    "mappeHent.xsd",
-    "mappeHentResultat.xsd"
-};
-
 const string commonNamespace = "KS.Fiks.IO.Arkiv.Models";
-var baseDirectory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-var dotnetFolder = baseDirectory.Parent!.Parent!.Parent!.Parent!.FullName;
 
-var outputPath = Path.Combine(dotnetFolder, "KS.Fiks.Arkiv.Models");
 var generator = new Generator
 {
-    OutputFolder = outputPath,
+    OutputFolder = "output",
     Log = s => Console.Out.WriteLine(s),
     GenerateNullables = false,
     SeparateClasses = true,
@@ -80,5 +58,10 @@ var generator = new Generator
         }
     }
 };
-var schemasToGenerate = fileList.Select(file => Path.Combine("Schema", file));
+var schemaFolder = new DirectoryInfo(args[0]);
+var schemasToGenerate = schemaFolder
+    .GetFiles()
+    .Where(file => file.Extension.Equals(".xsd"))
+    .Select(file => Path.Combine(args[0], file.Name));
+
 generator.Generate(schemasToGenerate);

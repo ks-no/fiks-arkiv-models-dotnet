@@ -4,7 +4,7 @@ const string commonNamespace = "KS.Fiks.IO.Arkiv.Models";
 
 var generator = new Generator
 {
-    OutputFolder = "output",
+    OutputFolder = args[1],
     Log = s => Console.Out.WriteLine(s),
     GenerateNullables = false,
     SeparateClasses = true,

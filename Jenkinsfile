@@ -1,7 +1,6 @@
 pipeline {
     agent any
     parameters {
-        booleanParam(defaultValue: false, description: 'Skal branch deployes til dev?', name: 'deployBranchToDev')
         booleanParam(defaultValue: false, description: 'Skal prosjektet releases?', name: 'isRelease')
         string(name: "specifiedVersion", defaultValue: "", description: "Hva er det nye versjonsnummeret (X.X.X)? Som default releases snapshot-versjonen")
         text(name: "releaseNotes", defaultValue: "Ingen endringer utført", description: "Hva er endret i denne releasen?")
@@ -9,9 +8,9 @@ pipeline {
         string(name: "reviewer", defaultValue: "Endringene krever ikke review", description: "Hvem har gjort review?")
     }
     environment {
-      MODELS_FOLDER = 'KS.Fiks.Arkiv.Models'
-      GENERATOR_FOLDER = 'KS.Fiks.Arkiv.XsdModelGenerator'
-  }
+        MODELS_FOLDER = 'KS.Fiks.Arkiv.Models'
+        GENERATOR_FOLDER = 'KS.Fiks.Arkiv.XsdModelGenerator'
+    }
     stages {
         stage('Initialize') {
             steps {
@@ -36,49 +35,142 @@ pipeline {
             }
         }
         stage('Fetch specification') {
-          steps{ 
+          steps { 
             dir('temp') {
               git branch: 'main',
               url: 'https://github.com/ks-no/fiks-arkiv-specification.git'
               stash(name: 'xsd', includes: 'Schema/V1/*')
             }
           }
+          post {
+            always {
+              deleteDir()
+            }
+          }
         }
-        stage('Generate models'){
+        stage('Generate models') {
           agent {
             docker {
               image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
-              args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet'
+              args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet'  
             }
           }
-        steps {
-          dir("${GENERATOR_FOLDER}"){
-            unstash 'xsd'
-            sh 'dotnet run Schema/V1'
-            stash(name: 'generated', includes: 'output/**')
+          steps {
+            dir("${GENERATOR_FOLDER}") {
+              unstash 'xsd'
+              sh 'dotnet run Schema/V1 output'
+              stash(name: 'generated', includes: 'output/**')
+            }
+          }
+          post {
+            always {
+              deleteDir()
+             }
+          }     
+        }
+        stage('Unfold artifacts') {
+          steps {
+            dir("unfold") {
+              unstash 'generated'
+              sh 'mv output/* .'
+              sh 'rm -r output'
+              stash(name: 'models', includes: '**')
+            }
+          }
+          post {
+            always {
+              deleteDir()
+             }
+          }  
+        }
+        stage('Build') {
+          environment {
+            NUGET_HTTP_CACHE_PATH = "${env.WORKSPACE + '@tmp/cache'}"
+            NUGET_CONF = credentials('nuget-config')
+          }
+          agent {
+            docker {
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
+              args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet'     
+            }
+          }
+          steps {
+            dir("${MODELS_FOLDER}") {
+              sh 'mkdir -p /.nuget/NuGet'
+              sh 'cp -f $NUGET_CONF ~/.nuget/NuGet/NuGet.Config'
+              unstash 'xsd'
+              unstash 'models'
+              sh 'dotnet restore --configfile ${NUGET_CONF}'
+              sh 'dotnet build --no-restore -c Release ${BUILD_SUFFIX}'
+              sh 'mv **/Release/*.nupkg .'
+              sh 'mv **/Release/*.snupkg .'
+              stash(name: 'builtnupkg', includes: '*.nupkg')
+              stash(name: 'builtsnupkg', includes: '*.snupkg')
+            }
+          }
+          post {
+            always {
+              deleteDir()
+            }
           }
         }
-      }
-      stage('Pack nuget'){
-        steps{
-          dir("${MODELS_FOLDER}"){
-            unstash 'generated'
-            sh 'ls -l'
-            unstash 'xsd'
-            sh 'ls -l'
-            sh 'mv output/* .'
-            sh 'ls -l'
-            sh 'rm -r output'
-            sh 'ls -l'
+        stage('Sign package') {
+          environment {
+            NUGET_HTTP_CACHE_PATH = "${env.WORKSPACE + '@tmp/cache'}"
+            CODE_SIGN_CERT = credentials('ks-codesign-combo')
+            CODE_SIGN_KEY = credentials('ks-codesign-combo-passwd')
+            TIMESTAMP_URL = 'http://timestamp.digicert.com'
+          }
+          agent {
+            docker {
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
+              args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet'     
+            }
+          }          
+          steps {
+            dir("tmpsign") {
+              unstash 'builtnupkg'
+              sh 'dotnet nuget sign *.nupkg --timestamper ${TIMESTAMP_URL} --certificate-path ${CODE_SIGN_CERT} --certificate-password ${CODE_SIGN_KEY}'
+              stash(name: 'signednupkg', includes: '*.nupkg')
+            }
+          }
+          post {
+            always {
+              deleteDir()
+            }     
           }
         }
+        stage('Push to Artifactory') {
+          environment {
+            NUGET_HTTP_CACHE_PATH = "${env.WORKSPACE + '@tmp/cache'}"
+            NUGET_ACCESS_KEY = credentials('artifactory-token-based')
+            NUGET_PUSH_REPO = 'https://artifactory.fiks.ks.no/artifactory/api/nuget/nuget-all'
+          }
+          agent {
+            docker {
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
+              args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet'     
+            }
+          }          
+          steps {
+            dir("tmppush") {
+              unstash 'signednupkg'
+              unstash 'builtsnupkg'
+              sh 'dotnet nuget push *.nupkg -k ${NUGET_ACCESS_KEY} -s ${NUGET_PUSH_REPO}'
+            }
+          }
+          post {
+            always {
+              deleteDir()
+            }
+          }                      
+        }
       }
-    // post {
-    //   always {
-    //     deleteDir()
-    //   }
-    // }
-  }
+  post {
+    always {
+      deleteDir()
+      }
+    }
 }
 
 def findVersionSuffix() {

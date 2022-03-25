@@ -165,7 +165,51 @@ pipeline {
             }
           }                      
         }
-      }
+        stage('Push to nuget.org') {
+          when {
+            anyOf {
+              expression { params.isRelease }
+            }
+          }
+          environment {
+            NUGET_ACCESS_KEY = credentials('ks-nuget-api-key')
+            NUGET_PUSH_REPO = 'https://api.nuget.org/v3/index.json'
+          }
+          steps {
+            dir("tmpnuget") {
+              unstash 'signednupkg'
+              unstash 'builtsnupkg'
+              sh 'dotnet nuget push *.nupkg -k ${NUGET_ACCESS_KEY} -s ${NUGET_PUSH_REPO}'
+            }
+          }
+          post {
+            always {
+              deleteDir()
+            }
+          }
+        }
+        stage('Set next version and push') {
+          when {
+            allOf {
+              expression { params.isRelease }
+              expression { return env.NEXT_VERSION }
+              expression { return env.CURRENT_VERSION }
+            }
+          }
+          steps {
+            gitCheckout(env.BRANCH_NAME)
+            gitTag(isRelease, env.CURRENT_VERSION)
+            prepareDotNetNoBuild(env.NEXT_VERSION)
+            gitPush()
+            script {
+              currentBuild.description = "${env.user} released version ${env.CURRENT_VERSION}"
+            }
+            withCredentials([usernamePassword(credentialsId: 'Github-token-login', passwordVariable: 'GITHUB_KEY', usernameVariable: 'USERNAME')]) {
+                sh "~/.local/bin/http --ignore-stdin -a ${USERNAME}:${GITHUB_KEY} POST https://api.github.com/repos/ks-no/${env.REPO_NAME}/releases tag_name=\"${env.CURRENT_VERSION}\" body=\"Release utført av ${env.user}\n\n## Endringer:\n${params.releaseNotes}\n\n ## Sikkerhetsvurdering: \n${params.securityReview} \n\n ## Review: \n${params.reviewer == 'Endringene krever ikke review' ? params.reviewer : "Review gjort av ${params.reviewer}"}\""
+            }
+          }
+        }
+    } 
   post {
     always {
       deleteDir()

@@ -38,23 +38,23 @@ var generator = new Generator
         },
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/dokumentfil/hent/v2"),
-            commonNamespace + ".Innsyn.Hent"
+            commonNamespace + ".Innsyn.Hent.Dokumentfil"
         },
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/journalpost/hent/v2"),
-            commonNamespace + ".Innsyn.Hent"
+            commonNamespace + ".Innsyn.Hent.Journalpost"
         },
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/journalpost/hent/resultat/v2"),
-            commonNamespace + ".Innsyn.Hent"
+            commonNamespace + ".Innsyn.Hent.Journalpost"
         },
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/mappe/hent/v2"),
-            commonNamespace + ".Innsyn.Hent"
+            commonNamespace + ".Innsyn.Hent.Mappe"
         },
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/mappe/hent/resultat/v2"),
-            commonNamespace + ".Innsyn.Hent"
+            commonNamespace + ".Innsyn.Hent.Mappe"
         }
     }
 };

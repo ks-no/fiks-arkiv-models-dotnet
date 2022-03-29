@@ -6,9 +6,10 @@ pipeline {
         text(name: "releaseNotes", defaultValue: "Ingen endringer utført", description: "Hva er endret i denne releasen?")
         text(name: "securityReview", defaultValue: "Endringene har ingen sikkerhetskonsekvenser", description: "Har endringene sikkerhetsmessige konsekvenser, og hvilke tiltak er i så fall iverksatt?")
         string(name: "reviewer", defaultValue: "Endringene krever ikke review", description: "Hvem har gjort review?")
+        string(name: "triggerbranch", defaultValue: "main", description: "Hvilke branch fra KS.Fiks.Arkiv.Specification skal det bygges fra?" )
     }
     environment {
-        MODELS_FOLDER = 'KS.Fiks.Arkiv.Models'
+        MODELS_FOLDER = 'KS.Fiks.Arkiv.Models.V1'
         GENERATOR_FOLDER = 'KS.Fiks.Arkiv.XsdModelGenerator'
     }
     stages {
@@ -37,7 +38,8 @@ pipeline {
         stage('Fetch specification') {
           steps { 
             dir('temp') {
-              git branch: 'main',
+              sh 'ls -l'
+              git branch: params.triggerbranch,
               url: 'https://github.com/ks-no/fiks-arkiv-specification.git'
               stash(name: 'xsd', includes: 'Schema/V1/*')
             }
@@ -58,6 +60,7 @@ pipeline {
           steps {
             dir("${GENERATOR_FOLDER}") {
               unstash 'xsd'
+              sh 'ls -l'
               sh 'dotnet run Schema/V1 output'
               stash(name: 'generated', includes: 'output/**')
             }
@@ -218,7 +221,7 @@ pipeline {
 }
 
 def findVersionSuffix() {
-  def findCommand = $/find -name "**\KS.Fiks.Arkiv.Models.csproj" -exec xpath '{}' '/Project/PropertyGroup/VersionPrefix/text()' \;/$
+  def findCommand = $/find -name "**\KS.Fiks.Arkiv.Models.V1.csproj" -exec xpath '{}' '/Project/PropertyGroup/VersionPrefix/text()' \;/$
 
   def version = sh(script: findCommand, returnStdout: true, label: 'Lookup current version from csproj files').trim().split('\n').find {
     return it.trim().matches(versionPattern())

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KS.Fiks.Arkiv.Models", "KS.Fiks.Arkiv.Models\KS.Fiks.Arkiv.Models.csproj", "{BA7CEEE6-6FA3-439A-BE22-448204F759EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KS.Fiks.Arkiv.Models.V1", "KS.Fiks.Arkiv.Models.V1\KS.Fiks.Arkiv.Models.V1.csproj", "{BA7CEEE6-6FA3-439A-BE22-448204F759EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KS.Fiks.Arkiv.XsdModelGenerator", "KS.Fiks.Arkiv.XsdModelGenerator\KS.Fiks.Arkiv.XsdModelGenerator.csproj", "{E43F321C-F492-42D2-9719-6C77D066B19F}"
 EndProject

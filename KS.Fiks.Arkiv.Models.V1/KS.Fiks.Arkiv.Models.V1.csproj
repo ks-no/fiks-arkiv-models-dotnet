@@ -1,9 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Title>KS.Fiks.Arkiv.Models.Dotnet</Title>
+        <Title>KS.Fiks.Arkiv.Models.V1</Title>
         <Authors>KS - Kommunesektorens Organisasjon</Authors>
-        <Copyright>KS - Kommunesektorens Organisasjon</Copyright>
         <Company>KS - Kommunesektorens Organisasjon</Company>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageIcon>KS.png</PackageIcon>
@@ -14,6 +13,12 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <VersionPrefix>0.0.1</VersionPrefix>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>KS.Fiks.Arkiv.Models.V1</PackageId>
+        <Description>C# klasser som følger XSD-skjema spesifisert i https://github.com/ks-no/fiks-arkiv-specification.</Description>
+        <PackageProjectUrl>https://github.com/ks-no/fiks-arkiv-models-dotnet</PackageProjectUrl>
+        <AssemblyName>KS.Fiks.Arkiv.Models.V1</AssemblyName>
+        <RootNamespace>KS.Fiks.Arkiv.Models.V1</RootNamespace>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,5 +32,6 @@
             <PackagePath>/</PackagePath>
         </None>
         <None Include="LICENSE" Pack="true" PackagePath="" />
+        <None Include="readme.md" Pack="true" PackagePath="" />
     </ItemGroup>
 </Project>

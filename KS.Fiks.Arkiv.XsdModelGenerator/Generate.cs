@@ -1,6 +1,6 @@
 ﻿using XmlSchemaClassGenerator;
 
-const string commonNamespace = "KS.Fiks.IO.Arkiv.Models";
+const string commonNamespace = "KS.Fiks.Arkiv.Models.V1";
 
 var generator = new Generator
 {
@@ -55,6 +55,10 @@ var generator = new Generator
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/mappe/hent/resultat/v2"),
             commonNamespace + ".Innsyn.Hent.Mappe"
+        },
+        {
+            new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivmeldingoppdatering/v2"),
+            commonNamespace + ".Arkivering.Arkivmelding.Oppdatering"
         }
     }
 };

@@ -1,7 +1,14 @@
 pipeline {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '50', artifactNumToKeepStr: '50'))
+        disableConcurrentBuilds()
+        timeout(time: 60, unit: 'MINUTES')
+        timestamps ()
+    }    
     agent any
     parameters {
-        booleanParam(defaultValue: false, description: 'Skal prosjektet releases?', name: 'isRelease')
+        booleanParam(name: 'isRelease', defaultValue: false, description: 'Skal prosjektet releases?')
+        booleanParam(name: 'pushToNugetOrg', defaultValue: false, description: 'Skal artifaktet pushes til nuget.org? Kun relevant for pre-release bygg da release alltid pushes dit')
         string(name: "specifiedVersion", defaultValue: "", description: "Hva er det nye versjonsnummeret (X.X.X)? Som default releases snapshot-versjonen")
         text(name: "releaseNotes", defaultValue: "Ingen endringer utført", description: "Hva er endret i denne releasen?")
         text(name: "securityReview", defaultValue: "Endringene har ingen sikkerhetskonsekvenser", description: "Har endringene sikkerhetsmessige konsekvenser, og hvilke tiltak er i så fall iverksatt?")
@@ -23,12 +30,11 @@ pipeline {
                     if(params.isRelease) {
                       env.VERSION_SUFFIX = ""
                       env.BUILD_SUFFIX = ""
-                      env.FULL_VERSION = env.CURRENT_VERSION
                     } else {
                       def timestamp = getTimestamp()
-                      env.VERSION_SUFFIX = "build.${timestamp}"
+                      def rc = params.triggerbranch == "main" ? "rc." : ""
+                      env.VERSION_SUFFIX = "${rc}build.${timestamp}"
                       env.BUILD_SUFFIX = "--version-suffix ${env.VERSION_SUFFIX}"
-                      env.FULL_VERSION = "${CURRENT_VERSION}-${env.VERSION_SUFFIX}"
                     }
                     print("Listing all environment variables:")
                     sh 'printenv'
@@ -38,7 +44,6 @@ pipeline {
         stage('Fetch specification') {
           steps { 
             dir('temp') {
-              sh 'ls -l'
               git branch: params.triggerbranch,
               url: 'https://github.com/ks-no/fiks-arkiv-specification.git'
               stash(name: 'xsd', includes: 'Schema/V1/*')
@@ -60,7 +65,6 @@ pipeline {
           steps {
             dir("${GENERATOR_FOLDER}") {
               unstash 'xsd'
-              sh 'ls -l'
               sh 'dotnet run Schema/V1 output'
               stash(name: 'generated', includes: 'output/**')
             }
@@ -172,6 +176,7 @@ pipeline {
           when {
             anyOf {
               expression { params.isRelease }
+              expression { params.pushToNugetOrg }
             }
           }
           environment {

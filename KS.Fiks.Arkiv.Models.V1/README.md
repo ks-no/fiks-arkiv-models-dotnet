@@ -1,36 +1,77 @@
 # Bruk av `KS.Fiks.Arkiv.Models.V1`
 
-## Genererte klasser
+Pakken ligger på [nuget](https://www.nuget.org/) og kan installeres i prosjekt med `dotnet add package KS.Fiks.Arkiv.Models.V1`
 
-Etter at nuget er inkludert i prosjekt er klassene tilgjengelig ved:
+## Eksempel
 
+Modellene kan brukes direkte med import av namespace:
 ```csharp
-using KS.Fiks.IO.Arkiv.Models.Arkivstruktur;
+using KS.Fiks.Arkiv.Models.V1.Arkivering.Arkivmelding;
 
-var arkiv = new Arkiv();
+var arkivmelding = new Arkivmelding
+{
+    ///...
+};
+
 ```
-
-## XSD skjema
 
 Skjema er inkludert in nuget-pakken og kan refereres med refleksjon:
 
 ```csharp
+// See https://aka.ms/new-console-template for more information
 using System.Reflection;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+using KS.Fiks.Arkiv.Models.V1.Arkivering.Arkivmelding;
 
-var referencesAssemblies = Assembly
+void ValidationHandler(object? _, ValidationEventArgs args)
+{
+    if (args.Severity == XmlSeverityType.Warning)
+        Console.Write("WARNING: ");
+    else if (args.Severity == XmlSeverityType.Error)
+        Console.Write("ERROR: ");
+
+    Console.WriteLine(args.Message);
+}
+
+var settings = new XmlReaderSettings
+{
+    ValidationType = ValidationType.Schema
+};
+settings.ValidationEventHandler += ValidationHandler;
+
+var modelsAssemblyName = Assembly
     .GetExecutingAssembly()
-    .GetReferencedAssemblies();
-
-var modelsAssemblyName = referencesAssemblies
+    .GetReferencedAssemblies()
     .Single(x
         => "KS.Fiks.Arkiv.Models.V1".Equals(x.Name));
 
-using var arkivStream = Assembly.Load(modelsAssemblyName)
-    .GetManifestResourceStream("KS.Fiks.Arkiv.Models.V1.Schema.arkivmelding.xsd");
+var modelsAssembly = Assembly
+    .Load(modelsAssemblyName);
 
-using var reader = new StreamReader(arkivStream);
+var schemaNames = modelsAssembly.GetManifestResourceNames();
+foreach (var name in schemaNames)
+{
+    using var resourceStream = modelsAssembly.GetManifestResourceStream(name);
+    using var streamReader = new StreamReader(resourceStream!);
+    var xmlSchema = XmlSchema.Read(streamReader, ValidationHandler);
+    settings.Schemas.Add(xmlSchema!);
+}
 
-var arkivXsd = reader.ReadToEnd();
+var arkivmelding = new Arkivmelding
+{
+    //System = "system",
+    MeldingId = "meldingId"
+};
+using var stream = new MemoryStream();
+var serializer = new XmlSerializer(arkivmelding.GetType());
+serializer.Serialize(stream, arkivmelding);
+stream.Position = 0;
 
-Console.WriteLine(arkivXsd);
+var reader = XmlReader.Create(stream, settings);
+var doc = new XmlDocument();
+
+//Vil printe melding med ERROR som sier at System er forventet i arkivobjektet
+doc.Load(reader);
 ```

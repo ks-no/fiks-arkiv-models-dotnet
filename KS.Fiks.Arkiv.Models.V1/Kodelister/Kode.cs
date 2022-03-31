@@ -1,6 +1,6 @@
 using System;
 
-namespace KS.Fiks.Arkiv.Models.Kodelister
+namespace KS.Fiks.Arkiv.Models.V1.Kodelister
 {
     public class Kode
     {

@@ -18,7 +18,7 @@
         <PackageProjectUrl>https://github.com/ks-no/fiks-arkiv-models-dotnet</PackageProjectUrl>
         <AssemblyName>KS.Fiks.Arkiv.Models.V1</AssemblyName>
         <RootNamespace>KS.Fiks.Arkiv.Models.V1</RootNamespace>
-        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -32,6 +32,6 @@
             <PackagePath>/</PackagePath>
         </None>
         <None Include="LICENSE" Pack="true" PackagePath="" />
-        <None Include="readme.md" Pack="true" PackagePath="" />
+        <None Include="README.md" Pack="true" PackagePath="" />
     </ItemGroup>
 </Project>

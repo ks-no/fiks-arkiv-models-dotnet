@@ -180,8 +180,15 @@ pipeline {
             }
           }
           environment {
+            NUGET_HTTP_CACHE_PATH = "${env.WORKSPACE + '@tmp/cache'}"
             NUGET_ACCESS_KEY = credentials('ks-nuget-api-key')
             NUGET_PUSH_REPO = 'https://api.nuget.org/v3/index.json'
+          }
+          agent {
+            docker {
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
+              args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet'     
+            }
           }
           steps {
             dir("tmpnuget") {

@@ -32,7 +32,7 @@ pipeline {
                       env.BUILD_SUFFIX = ""
                     } else {
                       def timestamp = getTimestamp()
-                      def rc = params.triggerbranch == "main" ? "rc." : ""
+                      def rc = params.triggerbranch == "main" && env.GIT_BRANCH == "main" ? "rc." : ""
                       env.VERSION_SUFFIX = "${rc}build.${timestamp}"
                       env.BUILD_SUFFIX = "--version-suffix ${env.VERSION_SUFFIX}"
                     }
@@ -212,15 +212,17 @@ pipeline {
             }
           }
           steps {
-            gitCheckout(env.BRANCH_NAME)
-            gitTag(isRelease, env.CURRENT_VERSION)
-            prepareDotNetNoBuild(env.NEXT_VERSION)
-            gitPush()
-            script {
-              currentBuild.description = "${env.user} released version ${env.CURRENT_VERSION}"
-            }
-            withCredentials([usernamePassword(credentialsId: 'Github-token-login', passwordVariable: 'GITHUB_KEY', usernameVariable: 'USERNAME')]) {
-                sh "~/.local/bin/http --ignore-stdin -a ${USERNAME}:${GITHUB_KEY} POST https://api.github.com/repos/ks-no/${env.REPO_NAME}/releases tag_name=\"${env.CURRENT_VERSION}\" body=\"Release utført av ${env.user}\n\n## Endringer:\n${params.releaseNotes}\n\n ## Sikkerhetsvurdering: \n${params.securityReview} \n\n ## Review: \n${params.reviewer == 'Endringene krever ikke review' ? params.reviewer : "Review gjort av ${params.reviewer}"}\""
+            dir("${MODELS_FOLDER}") {
+              gitCheckout(env.BRANCH_NAME)
+              gitTag(isRelease, env.CURRENT_VERSION)
+              prepareDotNetNoBuild(env.NEXT_VERSION)
+              gitPush()
+              script {
+                currentBuild.description = "${env.user} released version ${env.CURRENT_VERSION}"
+              }
+              withCredentials([usernamePassword(credentialsId: 'Github-token-login', passwordVariable: 'GITHUB_KEY', usernameVariable: 'USERNAME')]) {
+                  sh "~/.local/bin/http --ignore-stdin -a ${USERNAME}:${GITHUB_KEY} POST https://api.github.com/repos/ks-no/${env.REPO_NAME}/releases tag_name=\"${env.CURRENT_VERSION}\" body=\"Release utført av ${env.user}\n\n## Endringer:\n${params.releaseNotes}\n\n ## Sikkerhetsvurdering: \n${params.securityReview} \n\n ## Review: \n${params.reviewer == 'Endringene krever ikke review' ? params.reviewer : "Review gjort av ${params.reviewer}"}\""
+              }
             }
           }
         }

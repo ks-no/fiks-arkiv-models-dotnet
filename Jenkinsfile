@@ -63,7 +63,12 @@ pipeline {
               sh 'dotnet run Schema/V1 output'
               stash(name: 'generated', includes: 'output/**')
             }
-          }     
+          }
+          post {
+            always {
+              deleteDir()
+              }
+            }     
         }
         stage('Unfold artifacts') {
           steps {
@@ -100,6 +105,11 @@ pipeline {
               stash(name: 'builtsnupkg', includes: '*.snupkg')
             }
           }
+          post {
+           always {
+             deleteDir()
+             }
+           }
         }
         stage('Sign package') {
           environment {
@@ -121,6 +131,11 @@ pipeline {
               stash(name: 'signednupkg', includes: '*.nupkg')
             }
           }
+        post {
+          always {
+            deleteDir()
+            }
+          }
         }
         stage('Push to Artifactory') {
           environment {
@@ -140,7 +155,12 @@ pipeline {
               unstash 'builtsnupkg'
               sh 'dotnet nuget push *.nupkg -k ${NUGET_ACCESS_KEY} -s ${NUGET_PUSH_REPO}'
             }
-          }                    
+          }
+          post {
+            always {
+              deleteDir()
+              }
+            }                    
         }
         stage('Push to nuget.org') {
           when {
@@ -167,6 +187,11 @@ pipeline {
               sh 'dotnet nuget push *.nupkg -k ${NUGET_ACCESS_KEY} -s ${NUGET_PUSH_REPO}'
             }
           }
+          post {
+           always {
+             deleteDir()
+             }
+           }         
         }
         stage('Set next version and push') {
           when {

@@ -49,11 +49,6 @@ pipeline {
               stash(name: 'xsd', includes: 'Schema/V1/*')
             }
           }
-          post {
-            always {
-              deleteDir()
-            }
-          }
         }
         stage('Generate models') {
           agent {
@@ -68,11 +63,6 @@ pipeline {
               sh 'dotnet run Schema/V1 output'
               stash(name: 'generated', includes: 'output/**')
             }
-          }
-          post {
-            always {
-              deleteDir()
-             }
           }     
         }
         stage('Unfold artifacts') {
@@ -84,11 +74,6 @@ pipeline {
               stash(name: 'models', includes: '**')
             }
           }
-          post {
-            always {
-              deleteDir()
-             }
-          }  
         }
         stage('Build') {
           environment {
@@ -115,11 +100,6 @@ pipeline {
               stash(name: 'builtsnupkg', includes: '*.snupkg')
             }
           }
-          post {
-            always {
-              deleteDir()
-            }
-          }
         }
         stage('Sign package') {
           environment {
@@ -141,11 +121,6 @@ pipeline {
               stash(name: 'signednupkg', includes: '*.nupkg')
             }
           }
-          post {
-            always {
-              deleteDir()
-            }     
-          }
         }
         stage('Push to Artifactory') {
           environment {
@@ -165,12 +140,7 @@ pipeline {
               unstash 'builtsnupkg'
               sh 'dotnet nuget push *.nupkg -k ${NUGET_ACCESS_KEY} -s ${NUGET_PUSH_REPO}'
             }
-          }
-          post {
-            always {
-              deleteDir()
-            }
-          }                      
+          }                    
         }
         stage('Push to nuget.org') {
           when {
@@ -195,11 +165,6 @@ pipeline {
               unstash 'signednupkg'
               unstash 'builtsnupkg'
               sh 'dotnet nuget push *.nupkg -k ${NUGET_ACCESS_KEY} -s ${NUGET_PUSH_REPO}'
-            }
-          }
-          post {
-            always {
-              deleteDir()
             }
           }
         }

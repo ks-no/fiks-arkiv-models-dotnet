@@ -11,7 +11,7 @@
         <PackageTags>FIKS</PackageTags>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <VersionPrefix>0.0.7</VersionPrefix>
+        <VersionPrefix>0.0.8</VersionPrefix>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>KS.Fiks.Arkiv.Models.V1</PackageId>
         <Description>C# klasser som følger XSD-skjema spesifisert i https://github.com/ks-no/fiks-arkiv-specification.</Description>

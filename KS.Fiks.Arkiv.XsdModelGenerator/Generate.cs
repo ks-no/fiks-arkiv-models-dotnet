@@ -1,4 +1,7 @@
-﻿using XmlSchemaClassGenerator;
+﻿using System;
+using System.IO;
+using System.Linq;
+using XmlSchemaClassGenerator;
 
 const string commonNamespace = "KS.Fiks.Arkiv.Models.V1";
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
 {
-    public static class FiksArkivV1Meldingtype
+    public static class FiksArkivMeldingtype
     {
         // Arkivering
         public const string Arkivmelding = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding";

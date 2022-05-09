@@ -40,14 +40,8 @@ var settings = new XmlReaderSettings
 };
 settings.ValidationEventHandler += ValidationHandler;
 
-var modelsAssemblyName = Assembly
-    .GetExecutingAssembly()
-    .GetReferencedAssemblies()
-    .Single(x
-        => "KS.Fiks.Arkiv.Models.V1".Equals(x.Name));
-
 var modelsAssembly = Assembly
-    .Load(modelsAssemblyName);
+    .Load("KS.Fiks.Arkiv.Models.V1");
 
 var schemaNames = modelsAssembly.GetManifestResourceNames();
 foreach (var name in schemaNames)

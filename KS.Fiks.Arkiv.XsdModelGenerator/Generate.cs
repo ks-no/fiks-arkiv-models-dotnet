@@ -62,6 +62,22 @@ var generator = new Generator
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivmeldingoppdatering/v2"),
             commonNamespace + ".Arkivering.Arkivmelding.Oppdatering"
+        },
+        {
+            new NamespaceKey("http://www.arkivverket.no/standarder/noark5/feil/feilmelding/v2"),
+            commonNamespace + ".Feilmelding"
+        },
+        {
+            new NamespaceKey("http://www.arkivverket.no/standarder/noark5/feil/serverfeil/v2"),
+            commonNamespace + ".Feilmelding"
+        },
+        {
+            new NamespaceKey("http://www.arkivverket.no/standarder/noark5/feil/ikkefunnet/v2"),
+            commonNamespace + ".Feilmelding"
+        },
+        {
+            new NamespaceKey("http://www.arkivverket.no/standarder/noark5/feil/ugyldigforespoersel/v2"),
+            commonNamespace + ".Feilmelding"
         }
     }
 };

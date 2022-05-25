@@ -19,6 +19,8 @@
         <AssemblyName>KS.Fiks.Arkiv.Models.V1</AssemblyName>
         <RootNamespace>KS.Fiks.Arkiv.Models.V1</RootNamespace>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>fiks-io-strongly-named-key.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -33,5 +35,8 @@
         </None>
         <None Include="LICENSE" Pack="true" PackagePath="" />
         <None Include="README.md" Pack="true" PackagePath="" />
+        <None Include="fiks-io-strongly-named-key.snk">
+            <Link>fiks-io-strongly-named-key.snk</Link>
+        </None>
     </ItemGroup>
 </Project>

@@ -38,7 +38,14 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
             ArkivmeldingMottatt,
             ArkivmeldingKvittering
         };
-            
+
+        public static readonly List<string> FeilmeldingTyper = new List<string>()
+        {
+            Ugyldigforespørsel,
+            Serverfeil,
+            Ikkefunnet
+        };
+
         public static readonly List<string> InnsynTyper = new List<string>()
         {
             Sok,
@@ -62,6 +69,11 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
         public static bool IsInnsynType(string meldingsType)
         {
             return InnsynTyper.Contains(meldingsType);
+        }
+
+        public static bool IsFeilmelding(string meldingsType)
+        {
+            return FeilmeldingTyper.Contains(meldingsType);
         }
     }
 }

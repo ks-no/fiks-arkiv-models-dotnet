@@ -47,6 +47,7 @@ pipeline {
               git branch: params.triggerbranch,
               url: 'https://github.com/ks-no/fiks-arkiv-specification.git'
               stash(name: 'xsd', includes: 'Schema/V1/*')
+              stash(name: 'json', includes: 'Schema/V1/meldingstyper/meldingstyper.json')
             }
           }
         }
@@ -60,6 +61,7 @@ pipeline {
           steps {
             dir("${GENERATOR_FOLDER}") {
               unstash 'xsd'
+              unstash 'json'
               sh 'dotnet run Schema/V1 output'
               stash(name: 'generated', includes: 'output/**')
             }
@@ -96,6 +98,7 @@ pipeline {
               sh 'mkdir -p /.nuget/NuGet'
               sh 'cp -f $NUGET_CONF ~/.nuget/NuGet/NuGet.Config'
               unstash 'xsd'
+              unstash 'json'
               unstash 'models'
               sh 'dotnet restore --configfile ${NUGET_CONF}'
               sh 'dotnet build --no-restore -c Release ${BUILD_SUFFIX}'

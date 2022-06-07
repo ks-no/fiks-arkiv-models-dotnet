@@ -29,6 +29,7 @@
 
     <ItemGroup>
         <EmbeddedResource Include="Schema/V1/*.xsd" />
+        <EmbeddedResource Include="Schema/V1/meldingstyper/meldingstyper.json" />
         <None Include="KS.png">
             <Pack>true</Pack>
             <PackagePath>/</PackagePath>

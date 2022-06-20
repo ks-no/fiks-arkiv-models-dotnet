@@ -26,7 +26,7 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
         public const string SokResultatNoekler = "no.ks.fiks.arkiv.v1.innsyn.sok.resultat.noekler";
         
         // Feilmeldinger
-        public const string Ugyldigforespørsel = "no.ks.fik.arkiv.v1.feilmelding.ugyldigforespoersel";
+        public const string Ugyldigforespørsel = "no.ks.fiks.arkiv.v1.feilmelding.ugyldigforespoersel";
         public const string Serverfeil = "no.ks.fiks.arkiv.v1.feilmelding.serverfeil";
         public const string Ikkefunnet = "no.ks.fiks.arkiv.v1.feilmelding.ikkefunnet";
           

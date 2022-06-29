@@ -18,17 +18,47 @@ var generator = new Generator
             commonNamespace + ".Metadatakatalog"
         },
         {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/metadatakatalog/v1"),
+            commonNamespace + ".Metadatakatalog"
+        },
+        {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivmelding/v2"),
+            commonNamespace + ".Arkivering.Arkivmelding"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivmelding/v1"),
             commonNamespace + ".Arkivering.Arkivmelding"
         },
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivmeldingkvittering/v2"),
             commonNamespace + ".Arkivering.Arkivmeldingkvittering"
         },
-        {new NamespaceKey("http://www.ks.no/standarder/fiks/arkiv/sok/v1"), commonNamespace + ".Innsyn.Sok"},
-        {new NamespaceKey("http://www.ks.no/standarder/fiks/arkiv/sokeresultat/v1"), commonNamespace + ".Innsyn.Sok"},
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivmeldingkvittering/v1"),
+            commonNamespace + ".Arkivering.Arkivmeldingkvittering"
+        },
+        {
+            new NamespaceKey("http://www.ks.no/standarder/fiks/arkiv/sok/v1"), 
+            commonNamespace + ".Innsyn.Sok"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/sok/v1"), 
+            commonNamespace + ".Innsyn.Sok"
+        },
+        {
+            new NamespaceKey("http://www.ks.no/standarder/fiks/arkiv/sokeresultat/v1"), 
+            commonNamespace + ".Innsyn.Sok"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/sokeresultat/v1"), 
+            commonNamespace + ".Innsyn.Sok"
+        },
         {
             new NamespaceKey("http://www.ks.no/standarder/fiks/arkiv/arkivstruktur/minimum/v1"),
+            commonNamespace + ".Arkivstruktur"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivstruktur/minimum/v1"),
             commonNamespace + ".Arkivstruktur"
         },
         {
@@ -36,7 +66,15 @@ var generator = new Generator
             commonNamespace + ".Arkivstruktur"
         },
         {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivstruktur/noekler/v1"),
+            commonNamespace + ".Arkivstruktur"
+        },
+        {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivstruktur"),
+            commonNamespace + ".Arkivstruktur"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivstruktur/v1"),
             commonNamespace + ".Arkivstruktur"
         },
         {
@@ -44,7 +82,15 @@ var generator = new Generator
             commonNamespace + ".Innsyn.Hent.Dokumentfil"
         },
         {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/dokumentfil/hent/v1"),
+            commonNamespace + ".Innsyn.Hent.Dokumentfil"
+        },
+        {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/journalpost/hent/v2"),
+            commonNamespace + ".Innsyn.Hent.Journalpost"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/journalpost/hent/v1"),
             commonNamespace + ".Innsyn.Hent.Journalpost"
         },
         {
@@ -52,7 +98,15 @@ var generator = new Generator
             commonNamespace + ".Innsyn.Hent.Journalpost"
         },
         {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/journalpost/hent/resultat/v1"),
+            commonNamespace + ".Innsyn.Hent.Journalpost"
+        },
+        {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/mappe/hent/v2"),
+            commonNamespace + ".Innsyn.Hent.Mappe"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/mappe/hent/v1"),
             commonNamespace + ".Innsyn.Hent.Mappe"
         },
         {
@@ -60,7 +114,15 @@ var generator = new Generator
             commonNamespace + ".Innsyn.Hent.Mappe"
         },
         {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/mappe/hent/resultat/v1"),
+            commonNamespace + ".Innsyn.Hent.Mappe"
+        },
+        {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivmeldingoppdatering/v2"),
+            commonNamespace + ".Arkivering.Arkivmelding.Oppdatering"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivmeldingoppdatering/v1"),
             commonNamespace + ".Arkivering.Arkivmelding.Oppdatering"
         },
         {
@@ -68,7 +130,15 @@ var generator = new Generator
             commonNamespace + ".Feilmelding"
         },
         {
+            new NamespaceKey("ttps://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/feil/feilmelding/v1"),
+            commonNamespace + ".Feilmelding"
+        },
+        {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/feil/serverfeil/v2"),
+            commonNamespace + ".Feilmelding"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/feil/serverfeil/v1"),
             commonNamespace + ".Feilmelding"
         },
         {
@@ -76,7 +146,15 @@ var generator = new Generator
             commonNamespace + ".Feilmelding"
         },
         {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/feil/ikkefunnet/v1"),
+            commonNamespace + ".Feilmelding"
+        },
+        {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/feil/ugyldigforespoersel/v2"),
+            commonNamespace + ".Feilmelding"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/feil/ugyldigforespoersel/v1"),
             commonNamespace + ".Feilmelding"
         }
     }

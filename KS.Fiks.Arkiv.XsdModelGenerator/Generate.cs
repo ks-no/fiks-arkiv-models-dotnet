@@ -55,19 +55,19 @@ var generator = new Generator
         },
         {
             new NamespaceKey("http://www.ks.no/standarder/fiks/arkiv/arkivstruktur/minimum/v1"),
-            commonNamespace + ".Arkivstruktur"
+            commonNamespace + ".Arkivstruktur.Minimum"
         },
         {
             new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivstruktur/minimum/v1"),
-            commonNamespace + ".Arkivstruktur"
+            commonNamespace + ".Arkivstruktur.Minimum"
         },
         {
             new NamespaceKey("http://www.ks.no/standarder/fiks/arkiv/arkivstruktur/noekler/v1"),
-            commonNamespace + ".Arkivstruktur"
+            commonNamespace + ".Arkivstruktur.Noekler"
         },
         {
             new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivstruktur/noekler/v1"),
-            commonNamespace + ".Arkivstruktur"
+            commonNamespace + ".Arkivstruktur.Noekler"
         },
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivstruktur"),

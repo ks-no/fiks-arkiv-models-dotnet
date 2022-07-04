@@ -11,7 +11,6 @@ var generator = new Generator
     Log = s => Console.Out.WriteLine(s),
     GenerateNullables = false,
     SeparateClasses = true,
-    IntegerDataType = typeof(int),
     NamespaceProvider = new NamespaceProvider
     {
         {

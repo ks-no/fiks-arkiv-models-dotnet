@@ -130,7 +130,7 @@ var generator = new Generator
             commonNamespace + ".Feilmelding"
         },
         {
-            new NamespaceKey("ttps://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/feil/feilmelding/v1"),
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/feil/feilmelding/v1"),
             commonNamespace + ".Feilmelding"
         },
         {

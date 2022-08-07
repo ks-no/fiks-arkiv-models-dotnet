@@ -18,7 +18,9 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
             FiksArkivMeldingtype.MappeHentResultat,
             FiksArkivMeldingtype.MappeHent,
             FiksArkivMeldingtype.DokumentfilHentResultat,
-            FiksArkivMeldingtype.DokumentfilHent
+            FiksArkivMeldingtype.DokumentfilHent,
+            FiksArkivMeldingtype.Serverfeil,
+            FiksArkivMeldingtype.Ugyldigforespørsel
         };
         
          public static string GetPayloadFilnavn(string messageType)
@@ -41,6 +43,9 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
                 case FiksArkivMeldingtype.DokumentfilHentResultat:
                 case FiksArkivMeldingtype.MappeHentResultat:
                     return "resultat.xml";
+                case FiksArkivMeldingtype.Serverfeil:
+                case FiksArkivMeldingtype.Ugyldigforespørsel:
+                    return "feilmelding.xml";
                 default:
                     throw new ArgumentOutOfRangeException();
             }

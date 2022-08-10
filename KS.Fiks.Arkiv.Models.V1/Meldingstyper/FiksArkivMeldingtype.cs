@@ -15,8 +15,8 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
         // Innsyn Hent
         public const string MappeHent = "no.ks.fiks.arkiv.v1.innsyn.mappe.hent";
         public const string MappeHentResultat = "no.ks.fiks.arkiv.v1.innsyn.mappe.hent.resultat";
-        public const string JournalpostHent = "no.ks.fiks.arkiv.v1.innsyn.journalpost.hent";
-        public const string JournalpostHentResultat = "no.ks.fiks.arkiv.v1.innsyn.journalpost.hent.resultat";
+        public const string RegistreringHent = "no.ks.fiks.arkiv.v1.innsyn.registrering.hent";
+        public const string RegistreringHentResultat = "no.ks.fiks.arkiv.v1.innsyn.registrering.hent.resultat";
         public const string DokumentfilHent = "no.ks.fiks.arkiv.v1.innsyn.dokumentfil.hent";
         public const string DokumentfilHentResultat = "no.ks.fiks.arkiv.v1.innsyn.dokumentfil.hent.resultat";
         
@@ -55,8 +55,8 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
             SokResultatNoekler,
             MappeHent,
             MappeHentResultat,
-            JournalpostHent,
-            JournalpostHentResultat,
+            RegistreringHent,
+            RegistreringHentResultat,
             DokumentfilHent,
             DokumentfilHentResultat
             

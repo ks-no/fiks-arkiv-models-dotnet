@@ -9,7 +9,7 @@ var generator = new Generator
 {
     OutputFolder = args[1],
     Log = s => Console.Out.WriteLine(s),
-    GenerateNullables = false,
+    GenerateNullables = true,
     SeparateClasses = true,
     NamespaceProvider = new NamespaceProvider
     {

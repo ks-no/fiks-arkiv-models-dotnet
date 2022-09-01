@@ -86,20 +86,20 @@ var generator = new Generator
             commonNamespace + ".Innsyn.Hent.Dokumentfil"
         },
         {
-            new NamespaceKey("http://www.arkivverket.no/standarder/noark5/journalpost/hent/v2"),
-            commonNamespace + ".Innsyn.Hent.Journalpost"
+            new NamespaceKey("http://www.arkivverket.no/standarder/noark5/registrering/hent/v2"),
+            commonNamespace + ".Innsyn.Hent.Registrering"
         },
         {
-            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/journalpost/hent/v1"),
-            commonNamespace + ".Innsyn.Hent.Journalpost"
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/registrering/hent/v1"),
+            commonNamespace + ".Innsyn.Hent.Registrering"
         },
         {
-            new NamespaceKey("http://www.arkivverket.no/standarder/noark5/journalpost/hent/resultat/v2"),
-            commonNamespace + ".Innsyn.Hent.Journalpost"
+            new NamespaceKey("http://www.arkivverket.no/standarder/noark5/registrering/hent/resultat/v2"),
+            commonNamespace + ".Innsyn.Hent.Registrering"
         },
         {
-            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/journalpost/hent/resultat/v1"),
-            commonNamespace + ".Innsyn.Hent.Journalpost"
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/registrering/hent/resultat/v1"),
+            commonNamespace + ".Innsyn.Hent.Registrering"
         },
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/mappe/hent/v2"),

@@ -79,7 +79,7 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
 
         public static bool IsGyldigProtokollType(string meldingstype)
         {
-            return IsArkiveringType(meldingstype) || IsInnsynType(meldingstype) || IsFeilmelding(meldingstype)
+            return IsArkiveringType(meldingstype) || IsInnsynType(meldingstype) || IsFeilmelding(meldingstype);
         }
     }
 }

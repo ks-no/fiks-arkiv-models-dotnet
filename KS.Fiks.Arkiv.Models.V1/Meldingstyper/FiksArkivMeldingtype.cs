@@ -62,19 +62,24 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
             
         };
 
-        public static bool IsArkiveringType(string meldingsType)
+        public static bool IsArkiveringType(string meldingstype)
         {
-            return ArkiveringTyper.Contains(meldingsType);
+            return ArkiveringTyper.Contains(meldingstype);
         }
 
-        public static bool IsInnsynType(string meldingsType)
+        public static bool IsInnsynType(string meldingstype)
         {
-            return InnsynTyper.Contains(meldingsType);
+            return InnsynTyper.Contains(meldingstype);
         }
 
-        public static bool IsFeilmelding(string meldingsType)
+        public static bool IsFeilmelding(string meldingstype)
         {
-            return FeilmeldingTyper.Contains(meldingsType);
+            return FeilmeldingTyper.Contains(meldingstype);
+        }
+
+        public static bool IsGyldigProtokollType(string meldingstype)
+        {
+            return IsArkiveringType(meldingstype) || IsInnsynType(meldingstype) || IsFeilmelding(meldingstype)
         }
     }
 }

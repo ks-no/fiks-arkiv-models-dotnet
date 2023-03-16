@@ -5,12 +5,15 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
     public static class FiksArkivMeldingtype
     {
         // Arkivering
-        public const string Arkivmelding = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding";
+        public const string Arkivmelding = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett";
         public const string ArkivmeldingOppdater = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.oppdater";
         public const string ArkivmeldingOppdaterMottatt = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.oppdater.mottatt";
         public const string ArkivmeldingOppdaterKvittering = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.oppdater.kvittering";
-        public const string ArkivmeldingMottatt = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.mottatt";
-        public const string ArkivmeldingKvittering = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.kvittering";
+        public const string ArkivmeldingMottatt = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett.mottatt";
+        public const string ArkivmeldingKvittering = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett.kvittering";
+        public const string DokumentobjektOpprett = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjekt.opprett";
+        public const string DokumentobjektOpprettMottatt = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjek.opprett.mottatt";
+        public const string DokumentobjektOpprettKvittering = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjek.opprett.kvittering";
         
         // Innsyn Hent
         public const string MappeHent = "no.ks.fiks.arkiv.v1.innsyn.mappe.hent";

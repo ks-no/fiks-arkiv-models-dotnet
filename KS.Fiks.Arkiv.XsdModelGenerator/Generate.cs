@@ -30,11 +30,27 @@ var generator = new Generator
             commonNamespace + ".Arkivering.Arkivmelding"
         },
         {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivmelding/opprett/v1"),
+            commonNamespace + ".Arkivering.Arkivmelding"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/dokumentobjekt/opprett/v1"),
+            commonNamespace + ".Arkivering.Arkivmelding"
+        },
+        {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivmeldingkvittering/v2"),
             commonNamespace + ".Arkivering.Arkivmeldingkvittering"
         },
         {
             new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivmeldingkvittering/v1"),
+            commonNamespace + ".Arkivering.Arkivmeldingkvittering"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivmelding/opprett/kvittering/v1"),
+            commonNamespace + ".Arkivering.Arkivmeldingkvittering"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/dokumentobjekt/opprett/kvittering/v1"),
             commonNamespace + ".Arkivering.Arkivmeldingkvittering"
         },
         {

@@ -142,6 +142,10 @@ var generator = new Generator
             commonNamespace + ".Arkivering.Arkivmelding.Oppdatering"
         },
         {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/arkivmelding/oppdatering/v1"),
+            commonNamespace + ".Arkivering.Arkivmelding.Oppdatering"
+        },
+        {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/feil/feilmelding/v2"),
             commonNamespace + ".Feilmelding"
         },

@@ -70,6 +70,18 @@ var generator = new Generator
             commonNamespace + ".Innsyn.Sok"
         },
         {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/sokeresultat/minimum/v1"), 
+            commonNamespace + ".Innsyn.Sok"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/sokeresultat/utvidet/v1"), 
+            commonNamespace + ".Innsyn.Sok"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/sokeresultat/noekler/v1"), 
+            commonNamespace + ".Innsyn.Sok"
+        },
+        {
             new NamespaceKey("http://www.ks.no/standarder/fiks/arkiv/arkivstruktur/minimum/v1"),
             commonNamespace + ".Arkivstruktur.Minimum"
         },

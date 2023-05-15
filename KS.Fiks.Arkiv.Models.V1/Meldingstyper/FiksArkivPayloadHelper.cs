@@ -7,8 +7,12 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
     {
         public static HashSet<string> MeldingstyperMedPayload = new HashSet<string>
         {
-            FiksArkivMeldingtype.Arkivmelding,
-            FiksArkivMeldingtype.ArkivmeldingKvittering,
+            FiksArkivMeldingtype.ArkivmeldingOpprett,
+            FiksArkivMeldingtype.ArkivmeldingOpprettKvittering,
+            FiksArkivMeldingtype.DokumentobjektOpprett,
+            FiksArkivMeldingtype.DokumentobjektOpprettKvittering,
+            FiksArkivMeldingtype.AvskrivningOpprett,
+            FiksArkivMeldingtype.AvskrivningSlett,
             FiksArkivMeldingtype.Sok,
             FiksArkivMeldingtype.SokResultatMinimum,
             FiksArkivMeldingtype.SokResultatNoekler,
@@ -27,12 +31,12 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
         {
             switch (messageType)
             {
-                case FiksArkivMeldingtype.Arkivmelding:
+                case FiksArkivMeldingtype.ArkivmeldingOpprett:
                 case FiksArkivMeldingtype.DokumentfilHent:
                 case FiksArkivMeldingtype.MappeHent:
                 case FiksArkivMeldingtype.RegistreringHent:
                     return "arkivmelding.xml";
-                case FiksArkivMeldingtype.ArkivmeldingKvittering:
+                case FiksArkivMeldingtype.ArkivmeldingOpprettKvittering:
                     return "arkivmelding-kvittering.xml";
                 case FiksArkivMeldingtype.Sok:
                     return "sok.xml";
@@ -45,7 +49,15 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
                     return "resultat.xml";
                 case FiksArkivMeldingtype.Serverfeil:
                 case FiksArkivMeldingtype.Ugyldigforespørsel:
+                case FiksArkivMeldingtype.Ikkefunnet:
                     return "feilmelding.xml";
+                case FiksArkivMeldingtype.DokumentobjektOpprett:
+                    return "dokumentobjekt.xml";
+                case FiksArkivMeldingtype.DokumentobjektOpprettKvittering:
+                    return "dokumentobjekt-kvittering.xml";
+                case FiksArkivMeldingtype.AvskrivningOpprett:
+                case FiksArkivMeldingtype.AvskrivningSlett:
+                    return "avskrivning.xml";
                 default:
                     throw new ArgumentOutOfRangeException();
             }

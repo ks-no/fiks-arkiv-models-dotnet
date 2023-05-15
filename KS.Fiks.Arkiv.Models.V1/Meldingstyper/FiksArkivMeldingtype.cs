@@ -5,15 +5,21 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
     public static class FiksArkivMeldingtype
     {
         // Arkivering
-        public const string Arkivmelding = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett";
+        public const string ArkivmeldingOpprett = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett";
         public const string ArkivmeldingOppdater = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.oppdater";
         public const string ArkivmeldingOppdaterMottatt = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.oppdater.mottatt";
         public const string ArkivmeldingOppdaterKvittering = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.oppdater.kvittering";
-        public const string ArkivmeldingMottatt = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett.mottatt";
-        public const string ArkivmeldingKvittering = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett.kvittering";
+        public const string ArkivmeldingOpprettMottatt = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett.mottatt";
+        public const string ArkivmeldingOpprettKvittering = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett.kvittering";
         public const string DokumentobjektOpprett = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjekt.opprett";
         public const string DokumentobjektOpprettMottatt = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjek.opprett.mottatt";
         public const string DokumentobjektOpprettKvittering = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjek.opprett.kvittering";
+        public const string AvskrivningOpprett = "no.ks.fiks.arkiv.v1.arkivering.avskrivning.opprett";
+        public const string AvskrivningOpprettMottatt = "no.ks.fiks.arkiv.v1.arkivering.avskrivning.opprett.mottatt";
+        public const string AvskrivningOpprettKvittering = "no.ks.fiks.arkiv.v1.arkivering.avskrivning.opprett.kvittering";
+        public const string AvskrivningSlett = "no.ks.fiks.arkiv.v1.arkivering.avskrivning.slett";
+        public const string AvskrivningSlettMottatt = "no.ks.fiks.arkiv.v1.arkivering.avskrivning.slett.mottatt";
+        public const string AvskrivningSlettKvittering = "no.ks.fiks.arkiv.v1.arkivering.avskrivning.slett.kvittering";
         
         // Innsyn Hent
         public const string MappeHent = "no.ks.fiks.arkiv.v1.innsyn.mappe.hent";
@@ -31,16 +37,28 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
         
         // Feilmeldinger
         public const string Ugyldigforespørsel = "no.ks.fiks.arkiv.v1.feilmelding.ugyldigforespoersel";
+
         public const string Serverfeil = "no.ks.fiks.arkiv.v1.feilmelding.serverfeil";
+
         public const string Ikkefunnet = "no.ks.fiks.arkiv.v1.feilmelding.ikkefunnet";
-          
+
         public static readonly List<string> ArkiveringTyper = new List<string>()
         {
-            Arkivmelding,
+            ArkivmeldingOpprett,
+            ArkivmeldingOpprettMottatt,
+            ArkivmeldingOpprettKvittering,
             ArkivmeldingOppdater,
+            ArkivmeldingOppdaterMottatt,
             ArkivmeldingOppdaterKvittering,
-            ArkivmeldingMottatt,
-            ArkivmeldingKvittering
+            DokumentobjektOpprett,
+            DokumentobjektOpprettMottatt,
+            DokumentobjektOpprettKvittering,
+            AvskrivningOpprett,
+            AvskrivningOpprettMottatt,
+            AvskrivningOpprettKvittering,
+            AvskrivningSlett,
+            AvskrivningSlettMottatt,
+            AvskrivningSlettKvittering
         };
 
         public static readonly List<string> FeilmeldingTyper = new List<string>()

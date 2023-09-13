@@ -32,10 +32,13 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
             switch (messageType)
             {
                 case FiksArkivMeldingtype.ArkivmeldingOpprett:
-                case FiksArkivMeldingtype.DokumentfilHent:
-                case FiksArkivMeldingtype.MappeHent:
-                case FiksArkivMeldingtype.RegistreringHent:
                     return "arkivmelding.xml";
+                case FiksArkivMeldingtype.DokumentfilHent:
+                    return "dokumentfil-hent.xml";
+                case FiksArkivMeldingtype.MappeHent:
+                    return "mappe-hent.xml";
+                case FiksArkivMeldingtype.RegistreringHent:
+                    return "registrering-hent.xml";
                 case FiksArkivMeldingtype.ArkivmeldingOpprettKvittering:
                     return "arkivmelding-kvittering.xml";
                 case FiksArkivMeldingtype.Sok:
@@ -44,7 +47,6 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
                 case FiksArkivMeldingtype.SokResultatNoekler:
                 case FiksArkivMeldingtype.SokResultatUtvidet:
                 case FiksArkivMeldingtype.RegistreringHentResultat:
-                case FiksArkivMeldingtype.DokumentfilHentResultat:
                 case FiksArkivMeldingtype.MappeHentResultat:
                     return "resultat.xml";
                 case FiksArkivMeldingtype.Serverfeil:
@@ -52,12 +54,13 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
                 case FiksArkivMeldingtype.Ikkefunnet:
                     return "feilmelding.xml";
                 case FiksArkivMeldingtype.DokumentobjektOpprett:
-                    return "dokumentobjekt.xml";
+                    return "dokumentobjekt-opprett.xml";
                 case FiksArkivMeldingtype.DokumentobjektOpprettKvittering:
                     return "dokumentobjekt-kvittering.xml";
                 case FiksArkivMeldingtype.AvskrivningOpprett:
+                    return "avskrivning-opprett.xml";
                 case FiksArkivMeldingtype.AvskrivningSlett:
-                    return "avskrivning.xml";
+                    return "avskrivning-slett.xml";
                 default:
                     throw new ArgumentOutOfRangeException();
             }

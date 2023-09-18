@@ -99,8 +99,6 @@ pipeline {
           }
           steps {
             dir("${MODELS_FOLDER}") {
-              sh 'mkdir -p /.nuget/NuGet'
-              sh 'cp -f $NUGET_CONF ~/.nuget/NuGet/NuGet.Config'
               unstash 'xsd'
               unstash 'json'
               unstash 'models'

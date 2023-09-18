@@ -54,7 +54,7 @@ pipeline {
         stage('Generate models') {
           agent {
             docker {
-              image "docker-all/dotnet/sdk/6.0/"
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
               args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet -e DOTNET_CLI_HOME=/tmp -e XDG_DATA_HOME=/tmp'
               registryUrl 'https://docker-all.artifactory.fiks.ks.no'
               registryCredentialsId 'artifactory-token-based'
@@ -91,7 +91,7 @@ pipeline {
           }
           agent {
             docker {
-              image "docker-all/dotnet/sdk/6.0/"
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
               args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet -e DOTNET_CLI_HOME=/tmp -e XDG_DATA_HOME=/tmp'     
               registryUrl 'https://docker-all.artifactory.fiks.ks.no'
               registryCredentialsId 'artifactory-token-based'
@@ -127,7 +127,7 @@ pipeline {
           }
           agent {
             docker {
-              image "docker-all/dotnet/sdk/6.0/"
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
               args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet -e DOTNET_CLI_HOME=/tmp -e XDG_DATA_HOME=/tmp'
               registryUrl 'https://docker-all.artifactory.fiks.ks.no'
               registryCredentialsId 'artifactory-token-based'
@@ -154,7 +154,7 @@ pipeline {
           }
           agent {
             docker {
-              image "docker-all/dotnet/sdk/6.0/"
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
               args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet -e DOTNET_CLI_HOME=/tmp -e XDG_DATA_HOME=/tmp'
               registryUrl 'https://docker-all.artifactory.fiks.ks.no'
               registryCredentialsId 'artifactory-token-based'     
@@ -187,7 +187,7 @@ pipeline {
           }
           agent {
             docker {
-              image "docker-all/dotnet/sdk/6.0/"
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
               args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet -e DOTNET_CLI_HOME=/tmp -e XDG_DATA_HOME=/tmp'
               registryUrl 'https://docker-all.artifactory.fiks.ks.no'
               registryCredentialsId 'artifactory-token-based'

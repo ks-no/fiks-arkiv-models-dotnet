@@ -235,15 +235,49 @@ pipeline {
     }
 }
 
-def findVersionSuffix() {
-  def findCommand = $/find -name "**\KS.Fiks.Arkiv.Models.V1.csproj" -exec xpath '{}' '/Project/PropertyGroup/VersionPrefix/text()' \;/$
+def findVersionPrefix() {
+  
+    def files = findCsprojFiles()
+    
+    def versions = files.collect {
+      echo("Checking ${it}")
+      return extractVersion(readFile(file: it.getPath().trim(), encoding: 'UTF-8'))
+    }.findAll {
+      return it != null && ! it.trim().isEmpty()
+    }
+    echo "Found ${versions.size()} versions"
+    if(versions.size() > 0 && versions[0] != "") {
+      def currentVersion = versions[0]
+      echo "Version: ${currentVersion}"
+      return currentVersion
+    } else {
+      throw new Exception("No versionPrefix fond in csproj files")
+    }
+}
 
-  def version = sh(script: findCommand, returnStdout: true, label: 'Lookup current version from csproj files').trim().split('\n').find {
-    return it.trim().matches(versionPattern())
+def findCsprojFiles() {
+  def files = findFiles(glob: '**/*.csproj').findAll {
+    return it.getName().toUpperCase().contains("TEST") == false && it.getName().toUpperCase().contains("EXAMPLE") == false
   }
-  println("Version found: ${version}")
+  if(files.size() == 0) {
+    throw new Exception("No csproj files found")
+  }
+  echo("Found ${files.size()} csproj files")
+  return files
+}
+
+@NonCPS
+def extractVersion(xml) {
+  def debom = { data ->
+    if(data?.length() > 0 && data[0] == '\uFEFF') return data.drop(1) else return data
+  }
+  def xmlData = debom.call(xml)
+  def Project = new XmlSlurper().parseText(xmlData)
+  def version = Project['PropertyGroup']['VersionPrefix'].text().trim()
+  echo("Found version ${version}")
   return version
 }
+
 
 def incrementVersion(versionString) {
     def p = versionPattern()

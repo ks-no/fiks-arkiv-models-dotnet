@@ -25,7 +25,7 @@ pipeline {
                 script {
                     env.GIT_SHA = sh(returnStdout: true, script: 'git rev-parse HEAD').substring(0, 7)
                     env.REPO_NAME = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
-                    env.CURRENT_VERSION = findVersionSuffix()
+                    env.CURRENT_VERSION = findVersionPrefix()
                     env.NEXT_VERSION = params.specifiedVersion == "" ? incrementVersion(env.CURRENT_VERSION) : params.specifiedVersion
                     if(params.isRelease) {
                       env.VERSION_SUFFIX = ""

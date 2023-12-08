@@ -48,6 +48,7 @@ pipeline {
               url: 'https://github.com/ks-no/fiks-arkiv-specification.git'
               stash(name: 'xsd', includes: 'Schema/V1/*')
               stash(name: 'json', includes: 'Schema/V1/meldingstyper/meldingstyper.json')
+              stash(name: 'kodelister', includes: 'Schema/V1/kodelister/**/*.json')
             }
           }
         }
@@ -64,6 +65,7 @@ pipeline {
             dir("${GENERATOR_FOLDER}") {
               unstash 'xsd'
               unstash 'json'
+              unstash 'kodelister'
               sh 'dotnet run Schema/V1 output'
               stash(name: 'generated', includes: 'output/**')
             }

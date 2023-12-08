@@ -1,6 +1,6 @@
 namespace KS.Fiks.Arkiv.Models.V1.Kodelister
 {
-    public static class SakspartRolleKoder
+    public static class PartRolleKoder
     {
         public static readonly Kode Klient = new Kode("K", "Klient");
         public static readonly Kode Paaroerende = new Kode("P", "Pårørende");

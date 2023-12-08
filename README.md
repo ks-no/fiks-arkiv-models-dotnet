@@ -1,7 +1,8 @@
-# Produserer nuget som inneholder XSD skjema og genererte modeller
+# Fiks Arkiv Models V1
 
-## Skript for å generere modeller
+Dette repositoriet bygger en nuget-pakke som inneholder genererte C# klasser for Fiks Arkiv protokollen.
+Den inneholder også xsd-skjemaene som de genererte C# klassene er basert på og som definerer meldingsinnhold i protokollen Fiks Arkiv.
 
-`GenerateModels.sh` forventer at XSD-skjemaene er plassert under `/Schema/V1`. Den kopierer kopierer XSD skjema og generere C# klasser i prosjektet `KS.Fiks.Arkiv.Models` som blir pakket til nuget.
+Skjemaene og spesifikasjonen er i følgende GitHub repository: https://github.com/ks-no/fiks-arkiv-specification
 
-Se readme.md i `KS.Fiks.Arkiv.Models.V1` for bruk av nuget.
+Der finnes også en [Wiki](https://github.com/ks-no/fiks-arkiv-specification/wiki) for Fiks Arkiv protokollen.

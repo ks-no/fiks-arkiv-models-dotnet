@@ -12,8 +12,8 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
         public const string ArkivmeldingOpprettMottatt = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett.mottatt";
         public const string ArkivmeldingOpprettKvittering = "no.ks.fiks.arkiv.v1.arkivering.arkivmelding.opprett.kvittering";
         public const string DokumentobjektOpprett = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjekt.opprett";
-        public const string DokumentobjektOpprettMottatt = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjek.opprett.mottatt";
-        public const string DokumentobjektOpprettKvittering = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjek.opprett.kvittering";
+        public const string DokumentobjektOpprettMottatt = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjekt.opprett.mottatt";
+        public const string DokumentobjektOpprettKvittering = "no.ks.fiks.arkiv.v1.arkivering.dokumentobjekt.opprett.kvittering";
         public const string AvskrivningOpprett = "no.ks.fiks.arkiv.v1.arkivering.avskrivning.opprett";
         public const string AvskrivningOpprettMottatt = "no.ks.fiks.arkiv.v1.arkivering.avskrivning.opprett.mottatt";
         public const string AvskrivningOpprettKvittering = "no.ks.fiks.arkiv.v1.arkivering.avskrivning.opprett.kvittering";

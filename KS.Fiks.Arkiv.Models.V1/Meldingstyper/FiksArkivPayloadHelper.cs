@@ -32,6 +32,7 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
             switch (messageType)
             {
                 case FiksArkivMeldingtype.ArkivmeldingOpprett:
+                case FiksArkivMeldingtype.ArkivmeldingOppdater:
                     return "arkivmelding.xml";
                 case FiksArkivMeldingtype.DokumentfilHent:
                     return "dokumentfil-hent.xml";

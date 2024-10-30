@@ -42,7 +42,7 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
 
         public const string Ikkefunnet = "no.ks.fiks.arkiv.v1.feilmelding.ikkefunnet";
 
-        public static readonly List<string> ArkiveringTyper = new List<string>()
+        public static readonly ISet<string> ArkiveringTyper = new HashSet<string>
         {
             ArkivmeldingOpprett,
             ArkivmeldingOpprettMottatt,
@@ -61,14 +61,14 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
             AvskrivningSlettKvittering
         };
 
-        public static readonly List<string> FeilmeldingTyper = new List<string>()
+        public static readonly ISet<string> FeilmeldingTyper = new HashSet<string>
         {
             Ugyldigforespørsel,
             Serverfeil,
             Ikkefunnet
         };
 
-        public static readonly List<string> InnsynTyper = new List<string>()
+        public static readonly ISet<string> InnsynTyper = new HashSet<string>
         {
             Sok,
             SokResultatUtvidet,

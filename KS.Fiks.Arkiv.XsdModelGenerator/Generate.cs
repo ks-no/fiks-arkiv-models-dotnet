@@ -39,11 +39,11 @@ var generator = new Generator
         },
         {
             new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/avskrivning/opprett/v1"),
-            commonNamespace + ".Arkivering.Arkivmelding"
+            commonNamespace + ".Arkivering.Avskrivning"
         },
         {
             new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/avskrivning/slett/v1"),
-            commonNamespace + ".Arkivering.Arkivmelding"
+            commonNamespace + ".Arkivering.Avskrivning"
         },
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivmeldingkvittering/v2"),

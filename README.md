@@ -13,3 +13,6 @@ Skjemaene og spesifikasjonen er i følgende GitHub repository: https://github.co
 
 Der finnes også en [Wiki](https://github.com/ks-no/fiks-arkiv-specification/wiki) for Fiks Arkiv protokollen.
 
+#### Pakker:
+Nuget-pakken som er resultatet av github-prosjektet.
+- [KS.Fiks.Arkiv.Models.V1 (NuGet)](https://www.nuget.org/packages/KS.Fiks.Arkiv.Models.V1)

@@ -1,4 +1,24 @@
-# Bruk av `KS.Fiks.Arkiv.Models.V1`
+# KS.Fiks.Arkiv.Models.V1
+
+## Github repositories
+
+### fiks-arkiv-models-dotnet
+Dette er prosjektet som genererer denne koden fra spesification prosjektet
+
+https://github.com/ks-no/fiks-arkiv-models-dotnet
+
+[Releases](https://github.com/ks-no/fiks-arkiv-models-dotnet/releases)
+
+### fiks-arkiv-specification
+Dette er prosjektet hvor selve spesifikasjonen med xsd-skjema og meldingstyper er definert.
+
+Det er definisjonen av Fiks Arkiv protokollen.
+
+https://github.com/ks-no/fiks-arkiv-specification
+
+[Releases](https://github.com/ks-no/fiks-arkiv-specification/releases)
+
+##  Bruk av modellene
 
 Modellene kan brukes direkte med import av namespace:
 

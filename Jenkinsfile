@@ -44,8 +44,7 @@ pipeline {
         stage('Fetch specification') {
           steps { 
             dir('temp') {
-              git branch: params.triggerbranch,
-              url: 'https://github.com/ks-no/fiks-arkiv-specification.git'
+              git branch: params.triggerbranch, url: 'https://github.com/ks-no/fiks-arkiv-specification.git'
               stash(name: 'xsd', includes: 'Schema/V1/*')
               stash(name: 'json', includes: 'Schema/V1/meldingstyper/meldingstyper.json')
               stash(name: 'kodelister', includes: 'Schema/V1/kodelister/**/*.json')

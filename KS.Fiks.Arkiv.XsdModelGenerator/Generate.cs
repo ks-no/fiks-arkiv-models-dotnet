@@ -22,6 +22,10 @@ var generator = new Generator
             commonNamespace + ".Metadatakatalog"
         },
         {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/kodelister/v1"),
+            commonNamespace + ".Kodelister"
+        },
+        {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivmelding/v2"),
             commonNamespace + ".Arkivering.Arkivmelding"
         },
@@ -152,6 +156,14 @@ var generator = new Generator
         {
             new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/mappe/hent/resultat/v1"),
             commonNamespace + ".Innsyn.Hent.Mappe"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/kodeliste/hent/v1"),
+            commonNamespace + ".Innsyn.Hent.Kodeliste"
+        },
+        {
+            new NamespaceKey("https://ks-no.github.io/standarder/fiks-protokoll/fiks-arkiv/kodeliste/hent/resultat/v1"),
+            commonNamespace + ".Innsyn.Hent.Kodeliste"
         },
         {
             new NamespaceKey("http://www.arkivverket.no/standarder/noark5/arkivmeldingoppdatering/v2"),

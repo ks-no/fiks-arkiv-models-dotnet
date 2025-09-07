@@ -23,6 +23,8 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
             FiksArkivMeldingtype.MappeHent,
             FiksArkivMeldingtype.DokumentfilHentResultat,
             FiksArkivMeldingtype.DokumentfilHent,
+            FiksArkivMeldingtype.KodelisteHent,
+            FiksArkivMeldingtype.KodelisteHentResultat,
             FiksArkivMeldingtype.Serverfeil,
             FiksArkivMeldingtype.Ugyldigforespørsel
         };
@@ -40,6 +42,8 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
                     return "mappe-hent.xml";
                 case FiksArkivMeldingtype.RegistreringHent:
                     return "registrering-hent.xml";
+                case FiksArkivMeldingtype.KodelisteHent:
+                    return "kodeliste-hent.xml";
                 case FiksArkivMeldingtype.ArkivmeldingOpprettKvittering:
                     return "arkivmelding-kvittering.xml";
                 case FiksArkivMeldingtype.Sok:
@@ -49,6 +53,7 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
                 case FiksArkivMeldingtype.SokResultatUtvidet:
                 case FiksArkivMeldingtype.RegistreringHentResultat:
                 case FiksArkivMeldingtype.MappeHentResultat:
+                case FiksArkivMeldingtype.KodelisteHentResultat:
                     return "resultat.xml";
                 case FiksArkivMeldingtype.Serverfeil:
                 case FiksArkivMeldingtype.Ugyldigforespørsel:

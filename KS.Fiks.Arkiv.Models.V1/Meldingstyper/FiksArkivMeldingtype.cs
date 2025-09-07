@@ -28,6 +28,9 @@ namespace KS.Fiks.Arkiv.Models.V1.Meldingstyper
         public const string RegistreringHentResultat = "no.ks.fiks.arkiv.v1.innsyn.registrering.hent.resultat";
         public const string DokumentfilHent = "no.ks.fiks.arkiv.v1.innsyn.dokumentfil.hent";
         public const string DokumentfilHentResultat = "no.ks.fiks.arkiv.v1.innsyn.dokumentfil.hent.resultat";
+        public const string KodelisteHent = "no.ks.fiks.arkiv.v1.innsyn.kodeliste.hent";
+        public const string KodelisteHentResultat = "no.ks.fiks.arkiv.v1.innsyn.kodeliste.hent.resultat";
+
         
         // Innsyn Søk
         public const string Sok = "no.ks.fiks.arkiv.v1.innsyn.sok";

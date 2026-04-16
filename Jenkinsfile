@@ -103,7 +103,7 @@ pipeline {
               unstash 'xsd'
               unstash 'json'
               unstash 'models'
-              sh 'dotnet restore --configfile ${NUGET_CONF}'
+              sh 'dotnet restore'
               sh 'dotnet build --no-restore -c Release ${BUILD_SUFFIX}'
               sh 'mv **/Release/*.nupkg .'
               sh 'mv **/Release/*.snupkg .'

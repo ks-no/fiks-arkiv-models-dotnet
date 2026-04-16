@@ -54,7 +54,7 @@ pipeline {
         stage('Generate models') {
           agent {
             docker {
-              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:8.0"
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
               args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet -e DOTNET_CLI_HOME=/tmp -e XDG_DATA_HOME=/tmp'
               registryUrl 'https://docker-all.artifactory.fiks.ks.no'
               registryCredentialsId 'artifactory-token-based'
@@ -92,7 +92,7 @@ pipeline {
           }
           agent {
             docker {
-              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:8.0"
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
               args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet -e DOTNET_CLI_HOME=/tmp -e XDG_DATA_HOME=/tmp'     
               registryUrl 'https://docker-all.artifactory.fiks.ks.no'
               registryCredentialsId 'artifactory-token-based'
@@ -103,7 +103,7 @@ pipeline {
               unstash 'xsd'
               unstash 'json'
               unstash 'models'
-              sh 'dotnet restore --configfile ${NUGET_CONF}'
+              sh 'dotnet restore'
               sh 'dotnet build --no-restore -c Release ${BUILD_SUFFIX}'
               sh 'mv **/Release/*.nupkg .'
               sh 'mv **/Release/*.snupkg .'
@@ -126,7 +126,7 @@ pipeline {
           }
           agent {
             docker {
-              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:8.0"
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
               args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet -e DOTNET_CLI_HOME=/tmp -e XDG_DATA_HOME=/tmp'
               registryUrl 'https://docker-all.artifactory.fiks.ks.no'
               registryCredentialsId 'artifactory-token-based'
@@ -153,7 +153,7 @@ pipeline {
           }
           agent {
             docker {
-              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:8.0"
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
               args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet -e DOTNET_CLI_HOME=/tmp -e XDG_DATA_HOME=/tmp'
               registryUrl 'https://docker-all.artifactory.fiks.ks.no'
               registryCredentialsId 'artifactory-token-based'     
@@ -186,7 +186,7 @@ pipeline {
           }
           agent {
             docker {
-              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:8.0"
+              image "docker-all.artifactory.fiks.ks.no/dotnet/sdk:6.0"
               args '-v $HOME/.nuget:/.nuget -v $HOME/.dotnet:/.dotnet -e DOTNET_CLI_HOME=/tmp -e XDG_DATA_HOME=/tmp'
               registryUrl 'https://docker-all.artifactory.fiks.ks.no'
               registryCredentialsId 'artifactory-token-based'

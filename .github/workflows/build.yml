@@ -206,13 +206,26 @@ jobs:
           name: snupkg
           path: tmppush
 
+      - name: Add Artifactory NuGet source
+        working-directory: tmppush
+        run: |
+          dotnet nuget add source https://artifactory.fiks.ks.no/artifactory/api/nuget/nuget-all \
+            -n nuget-all \
+            -u "${{ secrets.ARTIFACTORY_USERNAME }}" \
+            -p "${{ secrets.ARTIFACTORY_PASSWORD }}" \
+            --store-password-in-clear-text
+
       - name: Push to Artifactory
         working-directory: tmppush
         run: |
           dotnet nuget push "*.nupkg" \
-            -k "${{ secrets.ARTIFACTORY_API_KEY }}" \
-            -s "https://artifactory.fiks.ks.no/artifactory/api/nuget/nuget-all" \
+            -s nuget-all \
             --skip-duplicate
+
+      - name: Remove Artifactory NuGet source
+        if: always()
+        working-directory: tmppush
+        run: dotnet nuget remove source nuget-all
 
   push-nuget-org:
     name: Push to nuget.org

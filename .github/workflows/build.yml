@@ -187,16 +187,17 @@ jobs:
   push-artifactory:
     name: Push to Artifactory
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Download signed nupkg
+      - name: Download nupkg
         uses: actions/download-artifact@v4
         with:
-          name: signed-nupkg
+          name: nupkg
           path: tmppush
 
       - name: Download snupkg

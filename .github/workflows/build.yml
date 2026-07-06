@@ -154,17 +154,25 @@ jobs:
         working-directory: ${{ env.MODELS_FOLDER }}
         run: dotnet build --no-restore -c Release ${{ steps.version.outputs.build_suffix }}
 
+      - name: Stage packages
+        shell: bash
+        run: |
+          mkdir -p staging
+          find ${{ env.MODELS_FOLDER }} -path '*/Release/*.nupkg' -exec cp {} staging/ \;
+          find ${{ env.MODELS_FOLDER }} -path '*/Release/*.snupkg' -exec cp {} staging/ \;
+          ls -l staging
+
       - name: Upload nupkg
         uses: actions/upload-artifact@v4
         with:
           name: nupkg
-          path: ${{ env.MODELS_FOLDER }}/**/Release/*.nupkg
+          path: staging/*.nupkg
 
       - name: Upload snupkg
         uses: actions/upload-artifact@v4
         with:
           name: snupkg
-          path: ${{ env.MODELS_FOLDER }}/**/Release/*.snupkg
+          path: staging/*.snupkg
 
   sign:
     name: Sign Package

@@ -168,11 +168,11 @@ jobs:
 
   sign:
     name: Sign Package
+    if: ${{ github.event.inputs.isRelease == 'true' || github.event.inputs.pushToNugetOrg == 'true' }}
     runs-on: windows-latest
     needs: build
     steps:
       - name: Sign packages with DigiCert Software Trust Manager
-        if: ${{ github.event.inputs.isRelease == 'true' || github.event.inputs.pushToNugetOrg == 'true' }}
         uses: ks-no/github-actions-public/dotnet-sign-nuget-packages@6c94bb9073e2619e18b74410ebfed4b40b4f6506
         with:
           artifact-name: nupkg
@@ -187,7 +187,6 @@ jobs:
   push-artifactory:
     name: Push to Artifactory
     runs-on: ubuntu-latest
-    needs: sign
     steps:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4

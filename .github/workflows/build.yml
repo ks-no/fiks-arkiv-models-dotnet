@@ -272,16 +272,18 @@ jobs:
     needs: [push-artifactory, build]
     if: ${{ github.event.inputs.isRelease == 'true' }}
     steps:
+      - name: Set up GitHub App
+        id: setup-github-app
+        uses: ks-no/github-actions-public/setup-github-app@main
+        with:
+          ks_github_app_id: ${{ vars.KS_RUNNER_APP_ID }}
+          ks_github_app_private_key: ${{ secrets.KS_RUNNER_PRIVATE_KEY }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.setup-github-app.outputs.app_token }}
           fetch-depth: 0
-
-      - name: Configure git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Tag release
         run: |
@@ -300,21 +302,35 @@ jobs:
           git commit -m "Bump version to ${{ needs.build.outputs.next_version }} [skip ci]"
           git push origin ${{ github.ref_name }}
 
-      - name: Create GitHub Release
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const isRelease = '${{ github.event.inputs.isRelease }}' === 'true';
-            const reviewer = '${{ github.event.inputs.reviewer }}';
-            const reviewerText = reviewer === 'Endringene krever ikke review'
-              ? reviewer
-              : `Review gjort av ${reviewer}`;
+      - name: Build release notes
+        id: release_notes
+        shell: bash
+        run: |
+          REVIEWER="${{ github.event.inputs.reviewer }}"
+          if [ "$REVIEWER" = "Endringene krever ikke review" ]; then
+            REVIEWER_TEXT="$REVIEWER"
+          else
+            REVIEWER_TEXT="Review gjort av $REVIEWER"
+          fi
+          {
+            echo "body<<EOF"
+            echo "## Endringer:"
+            echo "${{ github.event.inputs.releaseNotes }}"
+            echo ""
+            echo "## Sikkerhetsvurdering:"
+            echo "${{ github.event.inputs.securityReview }}"
+            echo ""
+            echo "## Review:"
+            echo "$REVIEWER_TEXT"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
-            await github.rest.repos.createRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag_name: '${{ needs.build.outputs.current_version }}',
-              name: '${{ needs.build.outputs.current_version }}',
-              body: `## Endringer:\n${{ github.event.inputs.releaseNotes }}\n\n## Sikkerhetsvurdering:\n${{ github.event.inputs.securityReview }}\n\n## Review:\n${reviewerText}`,
-              prerelease: !isRelease,
-            });
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ steps.setup-github-app.outputs.app_token }}
+        with:
+          tag_name: ${{ needs.build.outputs.current_version }}
+          name: ${{ needs.build.outputs.current_version }}
+          body: ${{ steps.release_notes.outputs.body }}
+          prerelease: false

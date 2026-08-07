@@ -43,14 +43,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout specification
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #v7.0.0
+        uses: ks-no/github-actions-public/checkout@main
         with:
           repository: ks-no/fiks-arkiv-specification
           ref: ${{ github.event.inputs.triggerbranch || 'main' }}
           path: specification
 
       - name: Upload XSD schemas
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        uses: ks-no/github-actions-public/upload-artifact@main
         with:
           name: specification
           path: specification/Schema/V1/
@@ -61,7 +61,7 @@ jobs:
     needs: fetch-specification
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #v7.0.0
+        uses: ks-no/github-actions-public/checkout@main
 
       - name: Setup .NET
         uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 #v5.4.0
@@ -69,7 +69,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Download specification
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        uses: ks-no/github-actions-public/download-artifact@main
         with:
           name: specification
           path: ${{ env.GENERATOR_FOLDER }}/Schema/V1
@@ -79,7 +79,7 @@ jobs:
         run: dotnet run Schema/V1 output
 
       - name: Upload generated models
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        uses: ks-no/github-actions-public/upload-artifact@main
         with:
           name: generated-models
           path: ${{ env.GENERATOR_FOLDER }}/output/
@@ -95,7 +95,7 @@ jobs:
       build_suffix: ${{ steps.version.outputs.build_suffix }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #v7.0.0
+        uses: ks-no/github-actions-public/checkout@main
 
       - name: Setup .NET
         uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 #v5.4.0
@@ -103,13 +103,13 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Download specification
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        uses: ks-no/github-actions-public/download-artifact@main
         with:
           name: specification
           path: ${{ env.MODELS_FOLDER }}/Schema/V1
 
       - name: Download generated models
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        uses: ks-no/github-actions-public/download-artifact@main
         with:
           name: generated-models
           path: ${{ env.MODELS_FOLDER }}
@@ -163,13 +163,13 @@ jobs:
           ls -l staging
 
       - name: Upload nupkg
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        uses: ks-no/github-actions-public/upload-artifact@main
         with:
           name: nupkg
           path: staging/*.nupkg
 
       - name: Upload snupkg
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        uses: ks-no/github-actions-public/upload-artifact@main
         with:
           name: snupkg
           path: staging/*.snupkg
@@ -181,7 +181,7 @@ jobs:
     needs: build
     steps:
       - name: Sign packages with DigiCert Software Trust Manager
-        uses: ks-no/github-actions-public/dotnet-sign-nuget-packages@6c94bb9073e2619e18b74410ebfed4b40b4f6506
+        uses: ks-no/github-actions-public/dotnet-sign-nuget-packages@main
         with:
           artifact-name: nupkg
           package-path: packages
@@ -203,13 +203,13 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Download nupkg
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        uses: ks-no/github-actions-public/download-artifact@main
         with:
           name: nupkg
           path: tmppush
 
       - name: Download snupkg
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        uses: ks-no/github-actions-public/download-artifact@main
         with:
           name: snupkg
           path: tmppush
@@ -247,13 +247,13 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Download signed nupkg
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        uses: ks-no/github-actions-public/download-artifact@main
         with:
           name: signed-nupkg
           path: tmpnuget
 
       - name: Download snupkg
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c #v8.0.1
+        uses: ks-no/github-actions-public/download-artifact@main
         with:
           name: snupkg
           path: tmpnuget
@@ -280,7 +280,7 @@ jobs:
           ks_github_app_private_key: ${{ secrets.KS_RUNNER_PRIVATE_KEY }}
 
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #v7.0.0
+        uses: ks-no/github-actions-public/checkout@main
         with:
           token: ${{ steps.setup-github-app.outputs.app_token }}
           fetch-depth: 0
